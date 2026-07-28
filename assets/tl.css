@@ -100,7 +100,9 @@ p{margin:0 0 1em}
    calculator keeps its own link in the hero and in the footer, so nothing is
    lost by dropping it from the bar. */
 @media (max-width:560px){
-  .nav{gap:12px; padding:11px 18px}
+  /* 22px matches .wrap so the mark lines up with the page content below it;
+     the room comes from the tighter gap and the smaller button instead. */
+  .nav{gap:12px; padding:11px 22px}
   .nav a.navlink{display:none}
   .nav .btn{padding:9px 15px; font-size:14px}
   .logo{font-size:16px; gap:8px}
