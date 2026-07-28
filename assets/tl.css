@@ -86,27 +86,67 @@ p{margin:0 0 1em}
   position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter:saturate(180%) blur(10px); border-bottom:1px solid var(--line);
 }
-.nav{display:flex; align-items:center; gap:18px; padding:13px 0}
+/* Horizontal padding is repeated from .wrap on purpose: .nav is also a .wrap,
+   comes later in this file at the same specificity, and a bare `padding:13px 0`
+   silently wiped it out — which pinned the logo to the left edge of the screen. */
+.nav{display:flex; align-items:center; gap:18px; padding:13px 22px}
 .logo{display:flex; align-items:center; gap:9px; text-decoration:none; color:var(--ink); font-weight:700; letter-spacing:-.02em; font-size:17px}
 .logo svg{display:block; flex:none}
 .nav-spacer{flex:1}
 .nav a.navlink{color:var(--ink-soft); text-decoration:none; font-size:14.5px; font-weight:550}
 .nav a.navlink:hover{color:var(--ink)}
 @media (max-width:640px){ .nav a.navlink.hide-sm{display:none} }
+/* Below 560px there is only room for the mark and the buy button. The free
+   calculator keeps its own link in the hero and in the footer, so nothing is
+   lost by dropping it from the bar. */
+@media (max-width:560px){
+  .nav{gap:12px; padding:11px 18px}
+  .nav a.navlink{display:none}
+  .nav .btn{padding:9px 15px; font-size:14px}
+  .logo{font-size:16px; gap:8px}
+  .logo svg{width:24px; height:24px}
+}
 
 /* ---------- buttons ---------- */
 .btn{
+  --glow:43,91,215;                      /* accent, as rgb triplet for rgba() */
+  position:relative; overflow:hidden; isolation:isolate;
   display:inline-block; background:var(--accent); color:#fff; text-decoration:none;
   padding:12px 22px; border-radius:var(--radius-sm); font-weight:650; font-size:15.5px;
   border:1px solid transparent; cursor:pointer; font-family:inherit; line-height:1.3;
-  transition:filter .15s ease, transform .15s ease;
+  white-space:nowrap;                    /* "Get it — $29" was wrapping to two lines */
+  box-shadow:0 1px 2px rgba(16,24,40,.10), 0 6px 16px -9px rgba(var(--glow),.65);
+  transition:filter .15s ease, transform .15s ease, box-shadow .25s ease;
 }
-.btn:hover{filter:brightness(1.07)}
+.btn:hover{filter:brightness(1.07); transform:translateY(-1px);
+  box-shadow:0 2px 4px rgba(16,24,40,.12), 0 12px 26px -10px rgba(var(--glow),.95)}
 .btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:3px solid rgba(var(--glow),.45); outline-offset:2px}
 .btn.lg{padding:15px 30px; font-size:17px}
-.btn.ghost{background:transparent; color:var(--accent-ink); border-color:var(--line)}
-.btn.ghost:hover{background:var(--accent-soft)}
-.btn.onnavy{background:#fff; color:var(--navy)}
+.btn.ghost{--glow:43,91,215; background:transparent; color:var(--accent-ink); border-color:var(--line); box-shadow:none}
+.btn.ghost:hover{background:var(--accent-soft); box-shadow:none; transform:none}
+.btn.onnavy{--glow:255,255,255; background:#fff; color:var(--navy)}
+
+/* Emphasis for the buy buttons: a slow breathing glow plus a sheen that sweeps
+   across every few seconds. Deliberately unhurried — this is a product people
+   trust with money, and a button that flashes reads as a discount pop-up. */
+@keyframes tl-breathe{
+  0%,100%{box-shadow:0 1px 2px rgba(16,24,40,.10), 0 6px 16px -9px rgba(var(--glow),.60)}
+  50%    {box-shadow:0 1px 2px rgba(16,24,40,.10), 0 12px 30px -9px rgba(var(--glow),1)}
+}
+@keyframes tl-sheen{
+  0%, 78%  {transform:translateX(-130%) skewX(-18deg)}
+  92%, 100%{transform:translateX(130%)  skewX(-18deg)}
+}
+.btn.glow{animation:tl-breathe 3.4s ease-in-out infinite}
+.btn.glow::after{
+  content:""; position:absolute; top:-2px; bottom:-2px; left:0; width:42%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.38), transparent);
+  transform:translateX(-130%) skewX(-18deg);
+  animation:tl-sheen 5.5s ease-in-out infinite;
+  pointer-events:none;
+}
+.btn.glow.onnavy::after{background:linear-gradient(90deg, transparent, rgba(43,91,215,.20), transparent)}
 
 /* ---------- sections ---------- */
 section{padding:64px 0}
@@ -229,6 +269,10 @@ details.faq .a p:last-child{margin-bottom:0}
   html{scroll-behavior:auto}
   .reveal{opacity:1 !important; transform:none !important; transition:none}
   .btn{transition:none}
+  /* Keep the emphasis, drop the movement: a static glow, no breathing, no sheen. */
+  .btn.glow{animation:none; box-shadow:0 2px 4px rgba(16,24,40,.12), 0 10px 26px -9px rgba(var(--glow),.95)}
+  .btn.glow::after{display:none}
+  .btn:hover{transform:none}
 }
 
 /* ---------- long-form article ---------- */
