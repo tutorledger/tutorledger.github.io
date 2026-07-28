@@ -150,6 +150,15 @@ p{margin:0 0 1em}
 }
 .btn.glow.onnavy::after{background:linear-gradient(90deg, transparent, rgba(43,91,215,.20), transparent)}
 
+/* Two buttons side by side. A margin on the second one only works while they
+   share a line — as soon as they wrap it pushes the lower button out of line
+   with everything else in the column. Gap handles both directions. */
+.btnrow{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 18px}
+@media (max-width:520px){
+  .btnrow{flex-direction:column; align-items:stretch}
+  .btnrow .btn{text-align:center}
+}
+
 /* ---------- sections ---------- */
 section{padding:64px 0}
 section.tight{padding:44px 0}
