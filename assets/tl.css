@@ -57,7 +57,11 @@ body{
   font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
-img,svg{max-width:100%}
+/* height:auto is not optional here. The screenshots carry explicit width/height
+   attributes so the browser can reserve space and avoid layout shift; without
+   height:auto the width scales down on narrow screens while the height stays at
+   the attribute value, and every image ends up vertically stretched. */
+img,svg{max-width:100%; height:auto}
 .wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px}
 .measure{max-width:var(--measure)}
 
@@ -185,7 +189,22 @@ details.faq .a p:last-child{margin-bottom:0}
 .shot .bar{display:flex; gap:6px; padding:10px 13px; border-bottom:1px solid var(--line); background:var(--card)}
 .shot .bar i{width:10px; height:10px; border-radius:50%; background:var(--line); display:block}
 .shot .body{padding:0}
-.shot img{display:block; width:100%}
+.shot img{display:block; width:100%; height:auto}
+/* A spreadsheet screenshot squeezed into 330px is unreadable, and the whole
+   point of showing it is that the reader can see the numbers. Below 760px the
+   image keeps a legible minimum width and scrolls inside its own frame — the
+   page itself never scrolls sideways. */
+@media (max-width:760px){
+  .shot .body{overflow-x:auto; -webkit-overflow-scrolling:touch}
+  .shot img{width:auto; min-width:660px; max-width:none}
+  .shot.fit img{width:100%; min-width:0}
+  .shot .body::-webkit-scrollbar{height:8px}
+  .shot .body::-webkit-scrollbar-thumb{background:var(--line); border-radius:4px}
+  .shot figcaption::after{
+    content:" — swipe the image sideways to read it";
+    color:var(--ink-faint); font-style:italic;
+  }
+}
 .shot .placeholder{
   padding:52px 22px; text-align:center; color:var(--ink-faint); font-size:14px;
   border:2px dashed var(--line); margin:16px; border-radius:8px;
