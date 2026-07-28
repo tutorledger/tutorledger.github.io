@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tutoring Business Profit Calculator — Free, No Sign-Up</title>
+<meta name="description" content="Free calculator for tutoring business owners. Work out your real monthly profit after tutor pay, no-shows and unpaid invoices — and see how much revenue you lose each year.">
+<link rel="canonical" href="https://REPLACE-ME.github.io/tutoring-profit-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tutoring Business Profit Calculator">
+<meta property="og:description" content="Find out what your tutoring business actually keeps after tutor pay, no-shows and unpaid invoices. Free, no sign-up.">
+<meta property="og:url" content="https://REPLACE-ME.github.io/tutoring-profit-calculator/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/logo.svg">
+<link rel="stylesheet" href="../assets/tl.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"WebApplication",
+      "name":"Tutoring Business Profit Calculator",
+      "applicationCategory":"BusinessApplication",
+      "operatingSystem":"Any",
+      "description":"Free calculator showing tutoring business owners their real monthly profit after tutor pay, no-shows and unpaid invoices.",
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"What is a normal no-show rate for a tutoring business?",
+         "acceptedAnswer":{"@type":"Answer","text":"Between 5% and 10% for most businesses with a written cancellation policy. Businesses without an enforced policy commonly run 12–20%."}},
+        {"@type":"Question","name":"What is a healthy profit margin for a tutoring business?",
+         "acceptedAnswer":{"@type":"Answer","text":"Most healthy tutoring businesses keep 15% to 30% net margin after tutor pay, fixed costs and the owner's salary."}},
+        {"@type":"Question","name":"How much should I charge for tutoring?",
+         "acceptedAnswer":{"@type":"Answer","text":"Work backwards: start from the tutor share you need to attract good people (commonly 50–60% of the session fee), add your fixed cost per session, then add your target margin."}}
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  /* calculator-specific additions on top of tl.css */
+  .app{display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:start}
+  @media (max-width:880px){ .app{grid-template-columns:1fr} }
+
+  .field{margin-bottom:15px}
+  .field:last-child{margin-bottom:0}
+  label{display:block; font-size:13.5px; font-weight:650; margin-bottom:6px; color:var(--ink)}
+  label small{display:block; font-weight:400; color:var(--ink-faint); font-size:12.2px; margin-top:2px; line-height:1.45}
+  input[type=number],select{
+    width:100%; padding:9px 11px; font-size:15px; font-family:inherit; font-variant-numeric:tabular-nums;
+    color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:var(--radius-sm); outline:none;
+  }
+  input[type=number]:focus,select:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+  .duo{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  @media (max-width:420px){ .duo{grid-template-columns:1fr} }
+  .check{display:flex; align-items:flex-start; gap:9px; font-size:13.5px; color:var(--ink-soft); font-weight:400; cursor:pointer}
+  .check input{margin-top:3px; accent-color:var(--accent); flex:none}
+
+  .out{border-top:1px solid var(--line-soft); padding:10px 0; display:flex; justify-content:space-between; align-items:baseline; gap:14px}
+  .out:first-of-type{border-top:0}
+  .out .k{font-size:14px; color:var(--ink-soft)}
+  .out .v{font-size:16px; font-weight:650; font-variant-numeric:tabular-nums; white-space:nowrap; text-align:right}
+  .leak{background:var(--loss-bg); border-radius:var(--radius-sm); padding:11px 13px; margin:7px 0; border-top:0}
+  .leak .k{color:var(--loss); font-weight:650}
+  .leak .v{color:var(--loss)}
+  .leak .yr{display:block; font-size:12px; font-weight:500; opacity:.85; margin-top:1px}
+  .total{background:var(--gain-bg); border-radius:var(--radius-sm); padding:14px; margin-top:13px}
+  .total .k{font-size:14.5px; font-weight:650; color:var(--ink)}
+  .total .v{font-size:25px; font-weight:750; color:var(--gain)}
+  .total.negative{background:var(--loss-bg)}
+  .total.negative .v{color:var(--loss)}
+  .mini{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:11px}
+  .mini div{background:var(--bg-alt); border-radius:var(--radius-sm); padding:11px 13px}
+  .mini .k{font-size:12px; color:var(--ink-faint); display:block; margin-bottom:2px}
+  .mini .v{font-size:19px; font-weight:700; font-variant-numeric:tabular-nums}
+  .verdict{margin-top:16px; padding:15px 16px; border-radius:var(--radius-sm); background:var(--accent-soft); font-size:14.5px; line-height:1.55; color:var(--accent-ink)}
+  .verdict strong{color:var(--ink)}
+  .emailform{display:flex; gap:8px; margin-top:14px; flex-wrap:wrap}
+  .emailform input[type=email]{
+    flex:1 1 210px; padding:10px 12px; font-size:15px; font-family:inherit;
+    border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--bg); color:var(--ink);
+  }
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <nav class="wrap nav">
+    <a class="logo" href="../">
+      <svg viewBox="0 0 32 32" width="27" height="27" aria-hidden="true">
+        <rect width="32" height="32" rx="7.5" fill="#16233D"/>
+        <rect x="8" y="8.5" width="9" height="3" rx="1.5" fill="#7CA0F0"/>
+        <rect x="8" y="14.5" width="16" height="3" rx="1.5" fill="#FFFFFF"/>
+        <rect x="8" y="20.5" width="12.5" height="3" rx="1.5" fill="#7CA0F0" opacity=".55"/>
+      </svg>
+      TutorLedger
+    </a>
+    <div class="nav-spacer"></div>
+    <a class="navlink hide-sm" href="../#inside">What's inside</a>
+    <a class="navlink hide-sm" href="../#faq">FAQ</a>
+    <a class="btn" href="../" >The system — $29</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="tight" style="padding-bottom:26px">
+    <div class="measure">
+      <p class="eyebrow">Free tool · No sign-up</p>
+      <h1>Tutoring Business Profit Calculator</h1>
+      <p class="lede" style="margin-top:14px">
+        Your revenue is not your income. Find out what your tutoring business actually keeps after
+        tutor pay, no-shows and invoices that never get paid.
+      </p>
+    </div>
+  </section>
+
+  <div class="app" style="margin-bottom:56px">
+
+    <!-- ============ INPUTS ============ -->
+    <form class="card" id="calc" autocomplete="off">
+      <h3>Your numbers</h3>
+      <p class="tiny faint" style="margin:5px 0 18px">Estimates are fine. Everything runs in your browser — nothing is stored or sent anywhere.</p>
+
+      <div class="field">
+        <label for="currency">Currency</label>
+        <select id="currency">
+          <option value="USD">$ USD</option>
+          <option value="GBP">£ GBP</option>
+          <option value="EUR">€ EUR</option>
+          <option value="CAD">$ CAD</option>
+          <option value="AUD">$ AUD</option>
+        </select>
+      </div>
+
+      <div class="duo">
+        <div class="field">
+          <label for="students">Active students</label>
+          <input type="number" id="students" value="45" min="0" step="1">
+        </div>
+        <div class="field">
+          <label for="sessions">Sessions per student / month</label>
+          <input type="number" id="sessions" value="4" min="0" step="0.5">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="rate">What you charge per session
+          <small>Your price to the family, not what you pay the tutor.</small>
+        </label>
+        <input type="number" id="rate" value="60" min="0" step="1">
+      </div>
+
+      <div class="duo">
+        <div class="field">
+          <label for="paytype">You pay tutors</label>
+          <select id="paytype">
+            <option value="pct">% of the session fee</option>
+            <option value="flat">A flat amount per session</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="payval" id="payvalLabel">Tutor share (%)</label>
+          <input type="number" id="payval" value="55" min="0" step="1">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="check">
+          <input type="checkbox" id="paynoshow">
+          <span>I still pay my tutors when a student no-shows</span>
+        </label>
+      </div>
+
+      <div class="duo">
+        <div class="field">
+          <label for="noshow">No-show / late cancel rate (%)
+            <small>Sessions you don't get paid for.</small>
+          </label>
+          <input type="number" id="noshow" value="8" min="0" max="100" step="0.5">
+        </div>
+        <div class="field">
+          <label for="unpaid">Invoices unpaid past due (%)
+            <small>Money billed but not collected.</small>
+          </label>
+          <input type="number" id="unpaid" value="6" min="0" max="100" step="0.5">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="fixed">Fixed monthly costs
+          <small>Rent, software, insurance, marketing — and your own salary if you take one.</small>
+        </label>
+        <input type="number" id="fixed" value="1800" min="0" step="10">
+      </div>
+    </form>
+
+    <!-- ============ OUTPUTS ============ -->
+    <div>
+      <div class="card">
+        <h3>What you actually keep</h3>
+        <p class="tiny faint" style="margin:5px 0 16px">Per month, based on the numbers on the left.</p>
+
+        <div class="out"><span class="k">Sessions scheduled</span><span class="v" id="oSessions">—</span></div>
+        <div class="out"><span class="k">Revenue you could bill</span><span class="v" id="oPotential">—</span></div>
+
+        <div class="out leak">
+          <span class="k">Lost to no-shows</span>
+          <span class="v" id="oNoshow">—<small class="yr" id="oNoshowYr"></small></span>
+        </div>
+
+        <div class="out"><span class="k">Actually invoiced</span><span class="v" id="oInvoiced">—</span></div>
+
+        <div class="out leak">
+          <span class="k">Stuck in unpaid invoices</span>
+          <span class="v" id="oUnpaid">—<small class="yr" id="oUnpaidYr"></small></span>
+        </div>
+
+        <div class="out"><span class="k">Cash collected</span><span class="v" id="oCollected">—</span></div>
+        <div class="out"><span class="k">Tutor pay</span><span class="v" id="oTutor">—</span></div>
+        <div class="out"><span class="k">Fixed costs</span><span class="v" id="oFixed">—</span></div>
+
+        <div class="total" id="totalBox">
+          <div class="out" style="border:0; padding:0">
+            <span class="k">Net profit / month</span><span class="v" id="oNet">—</span>
+          </div>
+        </div>
+
+        <div class="mini">
+          <div><span class="k">Profit per student</span><span class="v" id="oPerStudent">—</span></div>
+          <div><span class="k">Net margin</span><span class="v" id="oMargin">—</span></div>
+        </div>
+
+        <div class="verdict" id="verdict"></div>
+      </div>
+
+      <!-- ============ CTA ============ -->
+      <div class="card" style="margin-top:18px">
+        <h3>Those two red numbers are recoverable.</h3>
+        <p class="muted" style="margin:10px 0">
+          No-shows and unpaid invoices aren't a cost of doing business — they're a tracking problem.
+          Most owners can't name a single family who owes them money without spending half an hour
+          in a bank statement.
+        </p>
+        <p class="muted" style="margin:0 0 16px">
+          <strong style="color:var(--ink)">TutorLedger</strong> is a Google Sheets and Excel system that shows you who owes
+          what, aged by 30/60/90 days, what each student is worth after tutor pay, and what you'll
+          collect next month.
+        </p>
+        <a class="btn" href="../">See what's inside — $29</a>
+
+        <form class="emailform" action="https://formspree.io/f/REPLACE-ME" method="POST">
+          <input type="email" name="email" placeholder="you@yourbusiness.com" required aria-label="Your email address">
+          <input type="hidden" name="source" value="profit-calculator">
+          <button class="btn ghost" type="submit">Email me my results</button>
+        </form>
+        <p class="tiny faint" style="margin:9px 0 0">One email with your numbers and a short breakdown. No spam, unsubscribe any time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SEO CONTENT ============ -->
+  <article class="prose" style="border-top:1px solid var(--line); padding-top:40px">
+    <h2>How to work out what your tutoring business really earns</h2>
+    <p>Most tutoring business owners can tell you their monthly revenue within a few hundred. Very few can tell you their profit. The gap between those two numbers is where almost every struggling tutoring business is actually losing.</p>
+    <p>There are four things standing between a booked session and money in your account, and this calculator walks through all of them in order.</p>
+
+    <h3>1. Sessions you schedule vs. sessions you get paid for</h3>
+    <p>Every tutoring business has a no-show and late-cancellation rate. A rate of <strong>5–10% is normal</strong>; above 15% usually means your cancellation policy either doesn't exist or isn't enforced. The cost is invisible because it never appears on an invoice — you simply bill less than you planned, and the shortfall gets blamed on "a slow month".</p>
+    <p>The number that changes people's minds is the annual one. A business running 180 sessions a month at $60 with an 8% no-show rate is losing about $860 a month — <strong>over $10,000 a year</strong> — to sessions that were on the calendar and never got billed.</p>
+
+    <h3>2. Whether you still pay tutors for no-shows</h3>
+    <p>Many owners pay tutors for a booked slot regardless of attendance. It's fair, and it keeps good tutors. But if the family isn't charged and the tutor is paid, that session has a <strong>100% negative margin</strong>. Tick that box in the calculator and watch what happens to your profit per student. This single policy decision is often worth more than a price increase.</p>
+
+    <h3>3. Invoices that are billed but never collected</h3>
+    <p>This is the one owners consistently underestimate. Invoiced revenue feels like earned revenue, so it gets counted mentally and then quietly written off months later. In a business with 45 students, a 6% unpaid rate is roughly <strong>$600 a month sitting in someone else's bank account</strong>.</p>
+    <p>Unpaid invoices almost never fail because families can't pay. They fail because nobody followed up on day eight, and by day sixty the conversation has become awkward. Collection is a scheduling problem, not a money problem.</p>
+
+    <h3>4. What's left after tutor pay and fixed costs</h3>
+    <p>A healthy tutoring business keeps somewhere between <strong>15% and 30% net margin</strong> after tutor pay, fixed costs and the owner's own salary. Below 10%, you own a job with extra admin. Above 35%, you're usually either underpaying tutors or teaching most sessions yourself, and neither scales.</p>
+
+    <h2>How much should I charge for tutoring?</h2>
+    <p>Work backwards instead of copying local competitors. Decide the tutor share you need to attract good people — commonly 50–60% of the session fee — add your fixed cost per session, then add your target margin. Test the rate here before you announce it. A $5 increase across 180 sessions a month is <strong>$10,800 a year</strong>, and it rarely costs you a single student.</p>
+
+    <h3>What counts as a fixed cost?</h3>
+    <ul>
+      <li>Rent or room hire, utilities, insurance</li>
+      <li>Scheduling, accounting and payment software</li>
+      <li>Advertising, website, directory listing fees</li>
+      <li>Materials, assessments, licences</li>
+      <li><strong>Your own salary</strong> — if you don't pay yourself, your margin is fiction</li>
+    </ul>
+
+    <h2>Frequently asked questions</h2>
+    <h3>Is this calculator free?</h3>
+    <p>Yes, completely, with no sign-up. Everything runs in your browser and none of your numbers are sent anywhere or stored.</p>
+
+    <h3>What if I charge monthly tuition instead of per session?</h3>
+    <p>Divide your monthly tuition by the number of sessions included to get an effective per-session rate, then enter that. The maths works out identically.</p>
+
+    <h3>What's a normal no-show rate for tutoring?</h3>
+    <p>Between 5% and 10% for most businesses with a written cancellation policy. Businesses without an enforced policy commonly run 12–20%.</p>
+
+    <h3>How do I actually reduce unpaid invoices?</h3>
+    <p>Three things, in this order: a written payment policy signed at enrolment, an invoice due date that isn't "whenever", and a follow-up you send on a fixed schedule rather than when you happen to remember. The hard part is the third one, and it's the reason most owners eventually track it in a system instead of in their head.</p>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div style="min-width:220px">
+        <a class="logo" href="../" style="margin-bottom:10px">
+          <svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+            <rect width="32" height="32" rx="7.5" fill="#16233D"/>
+            <rect x="8" y="8.5" width="9" height="3" rx="1.5" fill="#7CA0F0"/>
+            <rect x="8" y="14.5" width="16" height="3" rx="1.5" fill="#FFFFFF"/>
+            <rect x="8" y="20.5" width="12.5" height="3" rx="1.5" fill="#7CA0F0" opacity=".55"/>
+          </svg>
+          TutorLedger
+        </a>
+        <p class="tiny faint" style="max-width:260px">Practical money tools for people who run tutoring businesses.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <a href="../#inside">What's inside</a>
+        <a href="../#faq">FAQ</a>
+        <a href="./">Free profit calculator</a>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <a href="../terms.html">Terms of sale</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../refund-policy.html">Refund policy</a>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <a href="mailto:tutorledger.support@gmail.com">tutorledger.support@gmail.com</a>
+        <p class="tiny faint" style="margin-top:4px; max-width:220px">We answer every email, usually within two business days.</p>
+      </div>
+    </div>
+    <p class="legal">
+      This calculator provides general business estimates from the figures you enter. It is not
+      accounting, tax or legal advice. © <span id="yr">2026</span> TutorLedger.
+    </p>
+  </div>
+</footer>
+
+<script src="../assets/tl.js" defer></script>
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+<script>
+(function(){
+  var SYM = { USD:"$", GBP:"£", EUR:"€", CAD:"C$", AUD:"A$" };
+  var $ = function(id){ return document.getElementById(id); };
+  var ids = ["currency","students","sessions","rate","paytype","payval","paynoshow","noshow","unpaid","fixed"];
+
+  function num(id){ var v = parseFloat($(id).value); return isFinite(v) && v > 0 ? v : 0; }
+
+  function money(v, sym){
+    var neg = v < 0;
+    var s = sym + Math.abs(Math.round(v)).toLocaleString("en-US");
+    return neg ? "-" + s : s;
+  }
+
+  function calc(){
+    var sym      = SYM[$("currency").value] || "$";
+    var students = num("students");
+    var perStu   = num("sessions");
+    var rate     = num("rate");
+    var payType  = $("paytype").value;
+    var payVal   = num("payval");
+    var payNoShow= $("paynoshow").checked;
+    var nsRate   = Math.min(num("noshow"), 100) / 100;
+    var upRate   = Math.min(num("unpaid"), 100) / 100;
+    var fixed    = num("fixed");
+
+    $("payvalLabel").textContent = payType === "pct"
+      ? "Tutor share (%)"
+      : "Tutor pay per session (" + sym + ")";
+
+    var scheduled = students * perStu;
+    var missed    = scheduled * nsRate;
+    var held      = scheduled - missed;
+
+    var potential = scheduled * rate;
+    var noShowLoss= missed * rate;
+    var invoiced  = potential - noShowLoss;
+    var unpaid    = invoiced * upRate;
+    var collected = invoiced - unpaid;
+
+    var perSessionCost = payType === "pct" ? rate * (payVal / 100) : payVal;
+    var paidSessions   = payNoShow ? scheduled : held;
+    var tutorCost      = paidSessions * perSessionCost;
+
+    var net    = collected - tutorCost - fixed;
+    var perStu2= students > 0 ? net / students : 0;
+    var margin = invoiced > 0 ? (net / invoiced) * 100 : 0;
+
+    $("oSessions").textContent  = Math.round(scheduled).toLocaleString("en-US");
+    $("oPotential").textContent = money(potential, sym);
+    $("oNoshow").firstChild.nodeValue = "-" + money(noShowLoss, sym);
+    $("oNoshowYr").textContent  = noShowLoss > 0 ? money(noShowLoss * 12, sym) + " a year" : "";
+    $("oInvoiced").textContent  = money(invoiced, sym);
+    $("oUnpaid").firstChild.nodeValue = "-" + money(unpaid, sym);
+    $("oUnpaidYr").textContent  = unpaid > 0 ? money(unpaid * 12, sym) + " a year" : "";
+    $("oCollected").textContent = money(collected, sym);
+    $("oTutor").textContent     = "-" + money(tutorCost, sym);
+    $("oFixed").textContent     = "-" + money(fixed, sym);
+    $("oNet").textContent       = money(net, sym);
+    $("oPerStudent").textContent= money(perStu2, sym);
+    $("oMargin").textContent    = (Math.round(margin * 10) / 10) + "%";
+
+    $("totalBox").className = net < 0 ? "total negative" : "total";
+
+    var leak = noShowLoss + unpaid;
+    var v;
+    if (students === 0 || rate === 0) {
+      v = "Enter your student count and session rate to see where your money goes.";
+    } else if (net < 0) {
+      v = "<strong>You're running at a loss of " + money(-net, sym) + " a month.</strong> " +
+          "Before you raise prices, look at the two red lines — recovering them would close " +
+          (leak >= -net ? "the entire gap." : "most of it.");
+    } else {
+      v = "<strong>You're leaking " + money(leak, sym) + " a month — " + money(leak * 12, sym) + " a year.</strong> " +
+          "That's " + (net > 0 ? Math.round((leak / net) * 100) : 0) + "% of your current profit, " +
+          "sitting in sessions you didn't bill and invoices nobody chased.";
+      if (payNoShow && missed > 0) {
+        v += " You're also paying tutors " + money(missed * perSessionCost, sym) +
+             " a month for sessions that generated no revenue at all.";
+      }
+    }
+    $("verdict").innerHTML = v;
+  }
+
+  ids.forEach(function(id){
+    var el = $(id);
+    el.addEventListener("input", calc);
+    el.addEventListener("change", calc);
+  });
+  calc();
+})();
+</script>
+</body>
+</html>

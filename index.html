@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TutorLedger — Tuition &amp; Cash Flow for Tutoring Businesses</title>
+<meta name="description" content="A Google Sheets and Excel system for tutoring business owners. See who owes you aged by 30/60/90 days, what each student is worth after tutor pay, and what you'll collect next month. One-time $29.">
+<link rel="canonical" href="https://REPLACE-ME.github.io/">
+<meta property="og:type" content="product">
+<meta property="og:title" content="TutorLedger — Tuition &amp; Cash Flow System for Tutoring Businesses">
+<meta property="og:description" content="Know who owes you, what each student is worth, and what you'll collect next month. Google Sheets + Excel. One-time $29.">
+<meta property="og:url" content="https://REPLACE-ME.github.io/">
+<meta property="og:image" content="https://REPLACE-ME.github.io/assets/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/logo.svg">
+<link rel="stylesheet" href="assets/tl.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Product",
+  "name":"TutorLedger",
+  "description":"A Google Sheets and Excel system for tutoring business owners that tracks tuition, ages unpaid invoices by 30/60/90 days, calculates margin per student after tutor pay, and forecasts collections.",
+  "brand":{"@type":"Brand","name":"TutorLedger"},
+  "offers":{
+    "@type":"Offer",
+    "price":"29.00",
+    "priceCurrency":"USD",
+    "availability":"https://schema.org/InStock",
+    "url":"https://REPLACE-ME.github.io/"
+  }
+}
+</script>
+</head>
+<body>
+
+<header class="site-head">
+  <nav class="wrap nav">
+    <a class="logo" href="./">
+      <svg viewBox="0 0 32 32" width="27" height="27" aria-hidden="true">
+        <rect width="32" height="32" rx="7.5" fill="#16233D"/>
+        <rect x="8" y="8.5" width="9" height="3" rx="1.5" fill="#7CA0F0"/>
+        <rect x="8" y="14.5" width="16" height="3" rx="1.5" fill="#FFFFFF"/>
+        <rect x="8" y="20.5" width="12.5" height="3" rx="1.5" fill="#7CA0F0" opacity=".55"/>
+      </svg>
+      TutorLedger
+    </a>
+    <div class="nav-spacer"></div>
+    <a class="navlink hide-sm" href="#inside">What's inside</a>
+    <a class="navlink hide-sm" href="#faq">FAQ</a>
+    <a class="navlink" href="tutoring-profit-calculator/">Free calculator</a>
+    <a class="btn" href="https://payhip.com/REPLACE-ME" rel="noopener">Get it — $29</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section class="tight">
+  <div class="wrap">
+    <div class="measure">
+      <p class="eyebrow">For people who run tutoring businesses</p>
+      <h1>Know exactly who owes you money.</h1>
+      <p class="lede" style="margin-top:16px">
+        Open it on Monday and it hands you a list: <strong>which families to contact, in what order,
+        and the exact message to send.</strong> Underneath, it tracks tuition, ages every unpaid
+        invoice by 30/60/90 days, and shows what each student is worth after tutor pay.
+        Google&nbsp;Sheets and Excel. Set it up once, fifteen minutes a week after that.
+      </p>
+
+      <div class="price" style="margin:30px 0 18px">
+        <span class="now num">$29</span>
+        <span class="was num">$39</span>
+        <span class="pill">Launch price</span>
+      </div>
+
+      <p style="margin-bottom:22px">
+        <a class="btn lg" href="https://payhip.com/REPLACE-ME" rel="noopener">Get TutorLedger</a>
+      </p>
+
+      <div class="trustbar">
+        <span><svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 14.2 4.3 10.5l1.4-1.4L8 11.4l6.3-6.3 1.4 1.4z"/></svg> 30-day refund, no questions</span>
+        <span><svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 14.2 4.3 10.5l1.4-1.4L8 11.4l6.3-6.3 1.4 1.4z"/></svg> One-time payment, not a subscription</span>
+        <span><svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 14.2 4.3 10.5l1.4-1.4L8 11.4l6.3-6.3 1.4 1.4z"/></svg> Works in Google Sheets <em>and</em> Excel</span>
+        <span><svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 14.2 4.3 10.5l1.4-1.4L8 11.4l6.3-6.3 1.4 1.4z"/></svg> Your file, your data — nothing is uploaded</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROBLEM ================= -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">The problem</p>
+      <h2>Your revenue is fine. Your collections aren't.</h2>
+      <p class="lede" style="margin-top:14px">
+        Almost nobody running a tutoring business is short on students. They're short on
+        invoices that actually got paid, and they find out months later.
+      </p>
+    </div>
+
+    <div class="grid g3">
+      <blockquote class="card reveal" style="margin:0">
+        <p style="margin:0; font-size:17px">“I have no idea who actually owes me money right now.”</p>
+      </blockquote>
+      <blockquote class="card reveal" style="margin:0">
+        <p style="margin:0; font-size:17px">“I found out a family hadn't paid in three months.”</p>
+      </blockquote>
+      <blockquote class="card reveal" style="margin:0">
+        <p style="margin:0; font-size:17px">“I spend my Sunday nights working out what to pay my tutors.”</p>
+      </blockquote>
+      <blockquote class="card reveal" style="margin:0">
+        <p style="margin:0; font-size:17px">“I'm busy, but I don't feel like I'm making money.”</p>
+      </blockquote>
+      <blockquote class="card reveal" style="margin:0">
+        <p style="margin:0; font-size:17px">“I know I'm losing money on no-shows. I just don't know how much.”</p>
+      </blockquote>
+      <div class="card reveal" style="margin:0; background:var(--accent-soft); border-color:transparent">
+        <p style="margin:0; font-size:15.5px; color:var(--accent-ink); font-weight:600">
+          Not sure how much this is costing you? Run your numbers through the
+          <a href="tutoring-profit-calculator/" style="color:inherit">free profit calculator</a> first.
+          It takes about a minute and you don't need to buy anything.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT IT SHOWS ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">What you get out of it</p>
+      <h2>Four answers you currently don't have.</h2>
+    </div>
+
+    <div class="grid g2">
+      <div class="card reveal">
+        <h3>Who owes you, aged by 30/60/90 days</h3>
+        <p class="muted" style="margin:10px 0 0">
+          Every family, every outstanding balance, sorted by how late it is. The moment an invoice
+          crosses your grace period it moves buckets and turns colour. No digging through a bank
+          statement to work out who to chase.
+        </p>
+      </div>
+      <div class="card reveal">
+        <h3>What each student is actually worth</h3>
+        <p class="muted" style="margin:10px 0 0">
+          Revenue per student minus what you pay the tutor who teaches them. Some of your students
+          are carrying the business. Some are costing you money. Most owners have never seen the
+          list ranked.
+        </p>
+      </div>
+      <div class="card reveal">
+        <h3>What no-shows cost you in real money</h3>
+        <p class="muted" style="margin:10px 0 0">
+          Every no-show and late cancellation, priced according to your own policy — including the
+          ones where you still paid the tutor. It's the number that changes how people write their
+          cancellation terms.
+        </p>
+      </div>
+      <div class="card reveal">
+        <h3>What you'll collect next month</h3>
+        <p class="muted" style="margin:10px 0 0">
+          A three-month projection built from your active students, their plans and their billing
+          cycle — so a slow month is something you see coming instead of something you survive.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INSIDE ================= -->
+<section id="inside" class="alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">What's inside</p>
+      <h2>Eleven connected sheets, not a pile of templates.</h2>
+      <p class="lede" style="margin-top:14px">
+        You enter each fact once. Everything downstream updates itself. Calculation sheets are
+        locked so a stray click can't break a formula.
+      </p>
+    </div>
+
+    <div class="tablewrap reveal">
+      <table>
+        <thead>
+          <tr><th style="width:190px">Sheet</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Start Here</strong></td><td>Setup order, colour legend, and the fifteen-minute weekly routine.</td></tr>
+          <tr class="hl"><td><strong>Action List</strong> 🔒</td><td>The one you open on a Monday. Every family who owes you, ranked by how much it's costing you, with what to say and which of the bonus emails to send.</td></tr>
+          <tr><td><strong>Setup</strong></td><td>Your plans and rates, your tutors and their pay, your payment terms, your no-show policy. Everything else reads from here.</td></tr>
+          <tr><td><strong>Students</strong></td><td>Roster with guardian, plan, discount, assigned tutor and status — grouped by family, so siblings bill together.</td></tr>
+          <tr><td><strong>Sessions</strong></td><td>Every session logged with status: held, no-show, late cancel, notice cancel or makeup. Billing and tutor cost apply themselves from your policy.</td></tr>
+          <tr><td><strong>Invoices</strong></td><td>What you've billed, to which family, for which period, and when it was due.</td></tr>
+          <tr><td><strong>Payments</strong></td><td>What's come in, applied against the right invoice.</td></tr>
+          <tr class="hl"><td><strong>Aging</strong> 🔒</td><td>The collections engine. Balance per family, days overdue, and 30/60/90 buckets with a traffic-light view.</td></tr>
+          <tr><td><strong>Tutor Payouts</strong> 🔒</td><td>Per tutor, per period: sessions held, hours, what you owe them, and the margin they generated.</td></tr>
+          <tr><td><strong>Dashboard</strong> 🔒</td><td>Collection rate, outstanding by bucket, active and churned students, margin after tutor pay, no-show cost, top and bottom students, three-month forecast — plus three charts.</td></tr>
+          <tr class="hl"><td><strong>Health Check</strong> 🔒</td><td>Seventeen checks that catch the input mistakes that quietly produce confident wrong numbers — a session pointing at a student who doesn't exist, a payment filed under a family that isn't on your roster, an invoice with no due date.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tiny faint" style="margin-top:12px">🔒 Locked calculation sheet — read-only by design.</p>
+  </div>
+</section>
+
+<!-- ================= SCREENSHOTS ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">A look inside</p>
+      <h2>See it before you buy it.</h2>
+    </div>
+    <figure class="shot reveal" style="margin:0 0 18px">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="body" style="overflow-x:auto">
+        <img src="assets/shot-actionlist.png" width="1114" height="395" loading="lazy"
+             alt="The Action List sheet ranking six families by how much they owe and how late they are, each row showing the guardian, email, balance, days late, what to do now, and which bonus email to send.">
+      </div>
+      <figcaption>The Action List. Not a report — a to-do list, in the order that costs you least to ignore last.</figcaption>
+    </figure>
+
+    <figure class="shot reveal" style="margin:0 0 18px">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="body" style="overflow-x:auto">
+        <img src="assets/shot-dashboard.png" width="1385" height="735" loading="lazy"
+             alt="The TutorLedger dashboard showing invoiced and collected totals, collection rate, outstanding balance, active students, margin after tutor pay and the monthly cost of missed sessions.">
+      </div>
+      <figcaption>The Dashboard. Change one cell — the month — and every figure follows.</figcaption>
+    </figure>
+
+    <figure class="shot reveal" style="margin:0 0 18px">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="body" style="overflow-x:auto">
+        <img src="assets/shot-aging.png" width="1161" height="299" loading="lazy"
+             alt="The Aging sheet listing each family with amount invoiced, paid, balance, days overdue and the balance split across current, 1-30, 31-60, 61-90 and 90+ day buckets.">
+      </div>
+      <figcaption>The Aging sheet. Green is safe, amber needs an email, red needs a phone call.</figcaption>
+    </figure>
+
+    <div class="grid g2">
+      <figure class="shot reveal" style="margin:0">
+        <div class="body" style="padding:14px; background:var(--card)">
+          <img src="assets/chart-collections.png" width="624" height="360" loading="lazy"
+               alt="Column chart comparing invoiced against collected revenue for the last six months.">
+        </div>
+        <figcaption>Six months of invoiced against actually collected. The gap is the problem.</figcaption>
+      </figure>
+      <figure class="shot reveal" style="margin:0">
+        <div class="body" style="padding:14px; background:var(--card)">
+          <img src="assets/chart-aging.png" width="492" height="360" loading="lazy"
+               alt="Column chart of outstanding balance by age bucket, coloured green through to red.">
+        </div>
+        <figcaption>Outstanding balance by age. Everything right of green is money you already earned.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARISON ================= -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Where it sits</p>
+      <h2>Between a $3 tracker and a $79/month platform.</h2>
+      <p class="lede" style="margin-top:14px">
+        Cheap templates log lessons. Studio platforms do everything, charge every month, and take a
+        weekend to migrate into. TutorLedger does one thing: your money.
+      </p>
+    </div>
+
+    <div class="tablewrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>&nbsp;</th>
+            <th class="c">$3 template</th>
+            <th class="c hl">TutorLedger</th>
+            <th class="c">Studio platform</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Session &amp; attendance log</td><td class="c yes">✓</td><td class="c hl yes">✓</td><td class="c yes">✓</td></tr>
+          <tr><td>Lesson plans &amp; student progress</td><td class="c yes">✓</td><td class="c hl no">—</td><td class="c yes">✓</td></tr>
+          <tr><td>Family ledger &amp; balances</td><td class="c no">—</td><td class="c hl yes">✓</td><td class="c yes">✓</td></tr>
+          <tr><td>Aging by 30/60/90 days</td><td class="c no">—</td><td class="c hl yes">✓</td><td class="c yes">✓</td></tr>
+          <tr><td>Margin per student after tutor pay</td><td class="c no">—</td><td class="c hl yes">✓</td><td class="c no">partial</td></tr>
+          <tr><td>Cost of no-shows in money</td><td class="c no">—</td><td class="c hl yes">✓</td><td class="c no">—</td></tr>
+          <tr><td>Three-month collection forecast</td><td class="c no">—</td><td class="c hl yes">✓</td><td class="c no">partial</td></tr>
+          <tr><td><strong>Tells you who to chase, ranked</strong></td><td class="c no">—</td><td class="c hl yes">✓</td><td class="c no">—</td></tr>
+          <tr><td><strong>Hands you the message to send</strong></td><td class="c no">—</td><td class="c hl yes">✓</td><td class="c no">—</td></tr>
+          <tr><td><strong>Checks your data for mistakes</strong></td><td class="c no">—</td><td class="c hl yes">✓</td><td class="c no">—</td></tr>
+          <tr><td><strong>Cost over three years</strong></td><td class="c"><strong>$3</strong></td><td class="c hl"><strong>$29</strong></td><td class="c"><strong>$1,800–3,600</strong></td></tr>
+          <tr><td>Migration &amp; lock-in</td><td class="c">none</td><td class="c hl">none — it's your file</td><td class="c">high</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BONUSES ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Included at no extra cost</p>
+      <h2>Two things that stop the problem happening again.</h2>
+    </div>
+    <div class="grid g2">
+      <div class="card reveal">
+        <span class="pill gain">Bonus 1</span>
+        <h3 style="margin:14px 0 8px">Client Agreement &amp; Payment Policy</h3>
+        <p class="muted" style="margin:0">
+          An editable enrolment agreement covering due dates, late fees, no-shows and cancellation
+          notice — in plain English. Most unpaid invoices trace back to terms that were never
+          written down.
+        </p>
+        <p class="tiny faint" style="margin:12px 0 0">Operational template, not legal advice. Have a local professional review it before use.</p>
+      </div>
+      <div class="card reveal">
+        <span class="pill gain">Bonus 2</span>
+        <h3 style="margin:14px 0 8px">The Overdue Payment Email Scripts</h3>
+        <p class="muted" style="margin:0">
+          Five ready-to-send emails, from a friendly reminder on day one to a firm pause-of-lessons
+          notice at day sixty. Written so you can chase money without feeling like a debt collector
+          — the reason most owners don't chase at all.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FIT ================= -->
+<section class="alt">
+  <div class="wrap">
+    <div class="grid g2">
+      <div class="card reveal">
+        <h3>This is for you if…</h3>
+        <ul class="ticks" style="margin-top:16px">
+          <li>You run a tutoring or test-prep business with roughly 10 to 200 students</li>
+          <li>You have at least one tutor other than yourself, or plan to</li>
+          <li>You bill monthly tuition, per session, or a mix of both</li>
+          <li>You're comfortable typing into a spreadsheet — no formulas required</li>
+          <li>You'd rather own a file than rent a platform</li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3>This is <em>not</em> for you if…</h3>
+        <ul class="crosses" style="margin-top:16px">
+          <li>You're a solo tutor with a handful of students — a notebook is genuinely fine</li>
+          <li>You want lesson planning, curriculum or student progress tracking</li>
+          <li>You want automatic bank feeds, card charging or a parent portal</li>
+          <li>You want software that emails families for you — this shows you who to email, you send it</li>
+        </ul>
+        <p class="tiny faint" style="margin:16px 0 0">We'd rather lose the sale than process a refund. If you're in this column, don't buy it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GUARANTEE ================= -->
+<section>
+  <div class="wrap">
+    <div class="guarantee reveal">
+      <h3>Use it for 30 days. If it doesn't find money you were losing, get every cent back.</h3>
+      <p class="muted" style="margin:0">
+        Email us within 30 days of purchase and we'll refund you in full. You don't have to explain
+        yourself, return anything, or sit through a retention pitch. If a spreadsheet can't show you
+        more than $29 of leaked revenue in a month, it hasn't earned its price.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Questions</p>
+      <h2>Before you buy.</h2>
+    </div>
+    <div class="measure">
+      <details class="faq reveal"><summary>Do I need Excel, or does Google Sheets work?</summary>
+        <div class="a"><p>Both, and both are tested. You get one <code>.xlsx</code> file that opens directly in Excel and imports into Google Sheets with every formula, the conditional formatting and all three charts intact.</p>
+        <p>Every formula was deliberately restricted to the set both applications support — nothing newer than Excel 2007, no dynamic arrays, no Sheets-only functions. That restraint is the reason it survives the import instead of arriving full of <code>#NAME?</code>.</p></div></details>
+
+      <details class="faq reveal"><summary>Is this a subscription?</summary>
+        <div class="a"><p>No. You pay $29 once and the file is yours permanently. There's nothing to cancel and no account to keep. Updates within the same version are free — you'll get an email with the new file.</p></div></details>
+
+      <details class="faq reveal"><summary>Will it break if I insert a row or change something?</summary>
+        <div class="a"><p>The three calculation sheets are protected, so you can't overwrite a formula by accident. The sheets you type into are ordinary rows — insert, sort and filter freely. Formulas are filled down in advance rather than generated dynamically, precisely so that editing doesn't disturb them.</p></div></details>
+
+      <details class="faq reveal"><summary>I bill monthly tuition, not per session. Does it still work?</summary>
+        <div class="a"><p>Yes. Each student is set to monthly, per-session, or package billing, and the system handles a mix across your roster. Monthly students are billed from the recurring schedule; per-session students are billed from their logged sessions.</p></div></details>
+
+      <details class="faq reveal"><summary>Can I use it for a music, dance or language school?</summary>
+        <div class="a"><p>Mostly, yes — the money side is identical: recurring tuition, families with siblings, no-shows, instructor pay. What it won't do is anything specific to those disciplines, such as recital or exam management. It was built for tutoring and it's honest about that.</p></div></details>
+
+      <details class="faq reveal"><summary>Does my data go anywhere?</summary>
+        <div class="a"><p>No. It's a spreadsheet file on your computer or in your own Google account. There is no server, no login, no sync, and no analytics inside the file. We never see a single student name.</p></div></details>
+
+      <details class="faq reveal"><summary>How long does setup take?</summary>
+        <div class="a"><p>About 20 minutes for your settings, tutors and rates, plus roughly a minute per student to enter your roster. The included guide walks through it in the order that avoids rework. After setup, budget about fifteen minutes a week.</p></div></details>
+
+      <details class="faq reveal"><summary>How do I get it after paying?</summary>
+        <div class="a"><p>Checkout runs through Payhip, which handles the payment and any applicable VAT or sales tax. Your download link appears immediately and is also emailed to you.</p></div></details>
+
+      <details class="faq reveal"><summary>Are there reviews?</summary>
+        <div class="a"><p>Not yet — TutorLedger is new, and we won't publish testimonials we don't have. That's exactly why the refund policy is unconditional and why the free calculator lets you test the thinking before you spend anything.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="deep">
+  <div class="wrap measure">
+    <h2>Find the money you already earned.</h2>
+    <p class="lede" style="color:#c3cddb; margin-top:14px">
+      One file. Nine connected sheets. Two bonuses. Thirty days to decide it was worth $29.
+    </p>
+    <div class="price" style="margin:26px 0 20px">
+      <span class="now num" style="color:#fff">$29</span>
+      <span class="was num" style="color:#8496af">$39</span>
+    </div>
+    <p style="margin-bottom:18px">
+      <a class="btn lg onnavy" href="https://payhip.com/REPLACE-ME" rel="noopener">Get TutorLedger</a>
+      <a class="btn lg ghost" href="tutoring-profit-calculator/" style="color:#c3cddb; border-color:#2c3d5c; margin-left:8px">Try the free calculator</a>
+    </p>
+    <p class="tiny" style="color:#8496af; margin:0">Secure checkout by Payhip · 30-day refund · One-time payment</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div style="min-width:220px">
+        <a class="logo" href="./" style="margin-bottom:10px">
+          <svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+            <rect width="32" height="32" rx="7.5" fill="#16233D"/>
+            <rect x="8" y="8.5" width="9" height="3" rx="1.5" fill="#7CA0F0"/>
+            <rect x="8" y="14.5" width="16" height="3" rx="1.5" fill="#FFFFFF"/>
+            <rect x="8" y="20.5" width="12.5" height="3" rx="1.5" fill="#7CA0F0" opacity=".55"/>
+          </svg>
+          TutorLedger
+        </a>
+        <p class="tiny faint" style="max-width:260px">Practical money tools for people who run tutoring businesses.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <a href="#inside">What's inside</a>
+        <a href="#faq">FAQ</a>
+        <a href="tutoring-profit-calculator/">Free profit calculator</a>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <a href="terms.html">Terms of sale</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="refund-policy.html">Refund policy</a>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <a href="mailto:tutorledger.support@gmail.com">tutorledger.support@gmail.com</a>
+        <p class="tiny faint" style="margin-top:4px; max-width:220px">We answer every email, usually within two business days.</p>
+      </div>
+    </div>
+    <p class="legal">
+      TutorLedger is a spreadsheet tool for business record-keeping. It is not accounting, tax or
+      legal advice, and it is not a substitute for a qualified professional. Figures it produces are
+      based entirely on the data you enter. Payments are processed by Payhip, which acts as the
+      seller of record and handles applicable VAT and sales tax.
+      © <span id="yr">2026</span> TutorLedger.
+    </p>
+  </div>
+</footer>
+
+<script src="assets/tl.js" defer></script>
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>

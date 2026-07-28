@@ -1,0 +1,19 @@
+# This repository is PUBLIC — it is served by GitHub Pages.
+# Nothing that is sold may ever end up in here.
+#
+# The repo is rooted inside site/ precisely so that ../product/ cannot be
+# committed by accident. These rules are a second line of defence in case
+# a product file is ever copied in here by mistake.
+
+*.xlsx
+*.xlsm
+*.docx
+*.zip
+TutorLedger*.pdf
+
+# noise
+Thumbs.db
+desktop.ini
+.DS_Store
+~$*
+*.tmp
