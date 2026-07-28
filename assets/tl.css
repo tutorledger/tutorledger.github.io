@@ -196,7 +196,10 @@ details.faq .a p:last-child{margin-bottom:0}
    page itself never scrolls sideways. */
 @media (max-width:760px){
   .shot .body{overflow-x:auto; -webkit-overflow-scrolling:touch}
-  .shot img{width:auto; min-width:660px; max-width:none}
+  /* A fixed width, not min-width: with width:auto the image renders at its full
+     intrinsic 2152px and the reader has six viewports to swipe through. 680px
+     keeps the numbers readable at a little under two swipes. */
+  .shot img{width:680px; max-width:none}
   .shot.fit img{width:100%; min-width:0}
   .shot .body::-webkit-scrollbar{height:8px}
   .shot .body::-webkit-scrollbar-thumb{background:var(--line); border-radius:4px}
