@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Track Tutoring Payments in Google Sheets — TutorLedger</title>
+<meta name="description" content="A practical structure for tracking tuition, invoices and payments in Google Sheets — including the one modelling mistake that makes most tutoring spreadsheets useless after three months.">
+<link rel="canonical" href="https://tutorledger.github.io/blog/track-tutoring-payments-google-sheets/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Track Tutoring Payments in Google Sheets — TutorLedger">
+<meta property="og:description" content="A practical structure for tracking tuition, invoices and payments in Google Sheets — including the one modelling mistake that makes most tutoring spreadsheets useless after three months.">
+<meta property="og:url" content="https://tutorledger.github.io/blog/track-tutoring-payments-google-sheets/">
+<meta property="og:image" content="https://tutorledger.github.io/assets/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/logo.svg">
+<link rel="stylesheet" href="../../assets/tl.css?v=efbc4c7b">
+<link rel="stylesheet" href="../../assets/blog.css?v=c5a45bbe">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article",
+ "headline":"How to Track Tutoring Payments in Google Sheets",
+ "description":"A practical structure for tracking tuition, invoices and payments in Google Sheets — including the one modelling mistake that makes most tutoring spreadsheets useless after three months.",
+ "datePublished":"2026-07-20","dateModified":"2026-07-20",
+ "author":{"@type":"Organization","name":"TutorLedger"},
+ "publisher":{"@type":"Organization","name":"TutorLedger"},
+ "mainEntityOfPage":"https://tutorledger.github.io/blog/track-tutoring-payments-google-sheets/",
+ "image":"https://tutorledger.github.io/assets/og-cover.png"}
+</script>
+</head>
+<body class="blog">
+<div class="progress"></div>
+<header class="site-head">
+  <nav class="wrap nav">
+    <a class="logo" href="../../"><svg viewBox="0 0 32 32" width="27" height="27" aria-hidden="true"><rect width="32" height="32" rx="7.5" fill="#16233D"/><rect x="8" y="8.5" width="9" height="3" rx="1.5" fill="#7CA0F0"/><rect x="8" y="14.5" width="16" height="3" rx="1.5" fill="#FFFFFF"/><rect x="8" y="20.5" width="12.5" height="3" rx="1.5" fill="#7CA0F0" opacity=".55"/></svg> TutorLedger</a>
+    <div class="nav-spacer"></div>
+    <a class="navlink hide-sm" href="../../blog/">Blog</a>
+    <a class="navlink" href="../../tutoring-profit-calculator/">Free calculator</a>
+    <a class="btn glow" href="../../">The system — $29</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <div class="article-head">
+    <p class="kicker">TutorLedger Journal</p>
+    <h1>How to Track Tutoring Payments in Google Sheets (Without It Falling Apart)</h1>
+    <p class="standfirst">Most tutoring spreadsheets work for a term and then quietly stop being trusted. The reason is almost always the same, and it is fixable in an afternoon.</p>
+    <div class="byline">
+      <span><b>20 July 2026</b></span>
+      <span>8 min read</span>
+      <span><a href="../" style="color:inherit">All articles</a></span>
+    </div>
+  </div>
+
+  <div class="layout">
+    <nav class="toc" aria-label="On this page">
+      <h4>On this page</h4>
+      <a href="#one-sheet">The mistake: one sheet, one row per payment</a>
+      <a href="#three-ledgers">The structure: three lists that reconcile</a>
+      <a href="#family-id">The column that decides everything: Family ID</a>
+      <a href="#due-dates">Give every invoice a due date, or nothing is ever late</a>
+      <a href="#aging">Age the balances into buckets</a>
+      <a href="#formulas">Formulas that survive other people using them</a>
+      <a href="#weekly">The fifteen minutes that make it worth having</a>
+    </nav>
+
+    <div class="prose">
+      <article class="post">
+<p class="opening">Nearly every tutoring business starts with a spreadsheet, and nearly every one of
+those spreadsheets is abandoned within a year. Not because spreadsheets are the wrong tool — they
+are a perfectly good tool for a business with fewer than two hundred students — but because of one
+structural decision made in the first ten minutes that cannot be undone later without retyping
+everything.</p>
+
+<p>This is how to make that decision correctly, and what to build around it.</p>
+
+<h2 id="one-sheet">The mistake: one sheet, one row per payment</h2>
+
+<p>The instinctive first move is a single sheet where each row is a payment: date, student name,
+amount. It works beautifully for about six weeks.</p>
+
+<p>Then a parent pays for two children in one transfer. Then someone pays half now and half next
+week. Then a student pauses for a month and you need to know whether they still owe for March. Each
+of these breaks a flat list, and the usual fix is a new column, then another, until the sheet has
+nineteen columns and nobody trusts the total.</p>
+
+<blockquote class="pull">A payment list tells you what came in. It cannot tell you what is
+still owed, and that is the number you actually need.</blockquote>
+
+<h2 id="three-ledgers">The structure: three lists that reconcile</h2>
+
+<p>Accounting solved this a long time ago, and the solution is smaller than it sounds. You need
+three separate lists, not one.</p>
+
+<div class="tablewrap"><table>
+<thead><tr><th>List</th><th>One row per</th><th>Answers</th></tr></thead>
+<tbody>
+<tr><td><strong>Invoices</strong></td><td>bill you issued</td><td>what was charged, to whom, and when it was due</td></tr>
+<tr><td><strong>Payments</strong></td><td>amount received</td><td>what actually arrived</td></tr>
+<tr><td><strong>Sessions</strong></td><td>lesson taught</td><td>what was delivered, and what it cost you</td></tr>
+</tbody></table></div>
+
+<p>Invoices minus payments is the balance. That single subtraction is the thing a flat payment list
+can never give you, and it is why this structure survives contact with reality.</p>
+
+<h2 id="family-id">The column that decides everything: Family ID</h2>
+
+<p>Here is the ten-minute decision. <strong>Money arrives by household, not by student.</strong> One
+parent, one bank transfer, two children. If your sheet is keyed on student name, you will spend the
+rest of its life splitting transfers by hand and never quite reconciling.</p>
+
+<p>Give every household a short code — <code>FAM-01</code>, <code>FAM-02</code> — and put it on every
+student, every invoice and every payment. Siblings share it. Then:</p>
+
+<ul>
+<li><strong>Billing and chasing</strong> aggregate by family, because that is how the money moves</li>
+<li><strong>Lessons and profitability</strong> aggregate by student, because that is how the work moves</li>
+</ul>
+
+<p>Retrofitting this later means touching every historic row. Doing it on day one costs nothing.</p>
+
+<div class="callout">
+<span class="label">Practical note</span>
+<p>Do not use the parent's surname as the key. Blended families, different surnames, and two
+unrelated Smiths will all break it within a year. Use a meaningless code and put the name in its own
+column.</p>
+</div>
+
+<h2 id="due-dates">Give every invoice a due date, or nothing is ever late</h2>
+
+<p>This sounds obvious and is skipped constantly. If an invoice has no due date, no formula can tell
+you it is overdue, so it never appears on any list of things to chase. It simply sits there being
+forty days old and feeling fine.</p>
+
+<p>Pick a rule and apply it without exception: issued on the 1st, due on the 5th, with a grace period
+of seven days. The grace period matters — it is what separates "recently issued" from "actually
+late", and it stops you chasing someone on day two.</p>
+
+<h2 id="aging">Age the balances into buckets</h2>
+
+<p>Once every invoice has a due date and a balance, you can sort what is owed by how old it is. In
+accounting this is called an aged debtors report, and it is standard practice in businesses of every
+size except, oddly, small service businesses.</p>
+
+<div class="tablewrap"><table>
+<thead><tr><th>Bucket</th><th>What it means</th></tr></thead>
+<tbody>
+<tr><td>Current</td><td>Issued, not yet past the grace period</td></tr>
+<tr><td>1–30 days</td><td>Late. A reminder is appropriate</td></tr>
+<tr><td>31–60 days</td><td>Needs a firm message with a date in it</td></tr>
+<tr><td>61–90 days</td><td>Formal notice territory</td></tr>
+<tr><td>90+ days</td><td>Phone call. Collection rates fall sharply past this point</td></tr>
+</tbody></table></div>
+
+<p>The formula is a nested <code>IF</code> on days overdue. It is not sophisticated. What is
+sophisticated is having it at all — the reason most owners chase the largest debt rather than the
+oldest is simply that nobody ever showed them the age.</p>
+
+<div class="inline-cta rise">
+  <h3>Before you build anything, get the number</h3>
+  <p>The free profit calculator shows what no-shows and unpaid invoices are costing you a year, using your own figures. No sign-up, nothing stored, about a minute.</p>
+  <a class="btn glow" href="https://tutorledger.github.io/tutoring-profit-calculator/">Open the free calculator</a>
+</div>
+
+<h2 id="formulas">Formulas that survive other people using them</h2>
+
+<p>If anyone other than you will ever open this file — and eventually someone will — a few rules
+save a lot of grief.</p>
+
+<ul>
+<li><strong>Fill formulas down in advance</strong>, to row 500 or so, wrapped in
+<code>IFERROR(…,"")</code> so empty rows stay blank. Then typing in the next row just works.</li>
+<li><strong>Protect the calculated columns.</strong> One stray paste over a formula and the sheet
+silently starts lying.</li>
+<li><strong>Avoid dynamic array formulas</strong> if the file will ever move between Excel and Google
+Sheets. Plain <code>SUMIFS</code> and <code>INDEX/MATCH</code> behave identically in both.</li>
+<li><strong>Never put a decimal inside a criteria string.</strong> <code>"&gt;0.005"</code> is parsed
+using the machine's decimal separator, so it silently matches nothing on any computer configured for
+a comma. Round the value and compare against <code>"&gt;0"</code> instead.</li>
+</ul>
+
+<p>That last one is not theoretical. It produces confident, wrong totals with no error message, and
+it only shows up on someone else's computer.</p>
+
+<h2 id="weekly">The fifteen minutes that make it worth having</h2>
+
+<p>A tracking system nobody opens is worse than no system, because it creates the feeling of being on
+top of things without the substance. Tie it to a fixed slot:</p>
+
+<ol>
+<li><strong>Log last week's sessions.</strong> Mark no-shows honestly — the whole point is to see what
+they cost.</li>
+<li><strong>Read the aged list and send two emails.</strong> Oldest first, not largest.</li>
+<li><strong>Once a month</strong>, raise the invoices and look at collection rate: money received
+divided by money invoiced. Below 90% means chasing has stopped being a habit.</li>
+</ol>
+
+<p>Fifteen minutes, once a week. The businesses that recover their unpaid tuition are not the ones
+with better spreadsheets. They are the ones that open theirs.</p>
+</article>
+
+      <div class="article-foot">
+        <p class="kicker">Keep reading</p>
+        <div class="related">
+      <a href="../client-wont-pay-tutoring/"><b>What to Do When a Tutoring Client Won't Pay</b><span>7 min read</span></a>
+      <a href="../tutoring-business-profit-margin/"><b>Tutoring Business Profit Margin: What's Normal, and Where It Goes</b><span>7 min read</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div style="min-width:220px">
+        <p class="tiny faint" style="max-width:260px">Practical money tools for people who run tutoring businesses.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <a href="../../">TutorLedger — $29</a>
+        <a href="../../tutoring-profit-calculator/">Free profit calculator</a>
+        <a href="../../blog/">Blog</a>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <a href="../../terms.html">Terms of sale</a>
+        <a href="../../privacy.html">Privacy</a>
+        <a href="../../refund-policy.html">Refund policy</a>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <a href="mailto:tutorledger.support@gmail.com">tutorledger.support@gmail.com</a>
+      </div>
+    </div>
+    <p class="legal">Articles here are general business guidance, not accounting, tax or legal advice.
+      © <span id="yr">2026</span> TutorLedger.</p>
+  </div>
+</footer>
+<script src="../../assets/tl.js?v=0a86f0d6" defer></script>
+<script src="../../assets/blog.js?v=1a45f15f" defer></script>
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>
