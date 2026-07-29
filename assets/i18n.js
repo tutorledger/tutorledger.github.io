@@ -71,13 +71,21 @@
     document.documentElement.lang = "pt-BR";
   }
 
-  /* Freshly inserted markup carries .reveal / .rise, which start at opacity:0.
-     The observers set up on page load already discarded the old nodes, so
-     without re-observing these the section stays invisible — indistinguishable
-     from a blank page. */
+  /* Freshly inserted markup carries .reveal / .rise, which start at opacity:0
+     and depend on an IntersectionObserver to become visible. Re-observing them
+     was not enough — content that is merely translated must never be able to
+     end up invisible, and correctness should not hinge on an observer firing.
+     So it is forced visible outright, with the inline style as a belt-and-braces
+     guard in case the class is ever outranked in the cascade. Nothing is lost:
+     re-animating a section the reader is already looking at adds nothing. */
   function restoreMotion(el) {
-    if (window.tlReveal) window.tlReveal(el);
-    if (window.tlRise) window.tlRise(el);
+    var anim = el.querySelectorAll(".reveal, .rise");
+    for (var i = 0; i < anim.length; i++) {
+      anim[i].classList.add("in");
+      anim[i].style.opacity = "1";
+      anim[i].style.transform = "none";
+      anim[i].style.transitionDelay = "0s";
+    }
   }
 
   function toEN() {
