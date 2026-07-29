@@ -126,13 +126,28 @@ p{margin:0 0 1em}
 @media (max-width:560px){ .langtoggle span{padding:5px 8px; font-size:11px} }
 
 #tl-lang-note{
-  background:var(--warn-bg,#FFF4DE); border-bottom:1px solid var(--line);
-  color:var(--warn,#8A5A00); font-size:13.5px; line-height:1.5;
+  background:#FFF4DE; border-bottom:1px solid var(--line);
+  color:#8A5A00; font-size:13.5px; line-height:1.5;
+  overflow:hidden; transition:height .24s ease, opacity .2s ease;
 }
-#tl-lang-note .wrap{padding-top:11px; padding-bottom:11px}
+#tl-lang-note .wrap{
+  padding-top:11px; padding-bottom:11px;
+  display:flex; align-items:flex-start; gap:16px;
+}
+#tl-lang-note p{margin:0; flex:1}
+#tl-lang-note .close{
+  flex:none; background:transparent; border:0; cursor:pointer; color:inherit;
+  padding:3px; margin:-2px -4px 0 0; border-radius:6px; opacity:.65;
+  display:inline-flex; transition:opacity .15s ease, background .15s ease;
+}
+#tl-lang-note .close:hover{opacity:1; background:rgba(138,90,0,.12)}
+#tl-lang-note .close:focus-visible{outline:2px solid currentColor; outline-offset:1px}
+#tl-lang-note.gone{height:0 !important; opacity:0}
 @media (prefers-color-scheme: dark){
   #tl-lang-note{background:#2A2113; color:#D9A441}
+  #tl-lang-note .close:hover{background:rgba(217,164,65,.16)}
 }
+@media (prefers-reduced-motion: reduce){ #tl-lang-note{transition:none} }
 
 /* ---------- buttons ---------- */
 .btn{
