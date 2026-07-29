@@ -36,20 +36,34 @@
   }
 
   // ---- reveal ----------------------------------------------------------
-  var targets = document.querySelectorAll(".rise");
-  if (reduced || !("IntersectionObserver" in window)) {
-    [].forEach.call(targets, function (el) { el.classList.add("in"); });
-    return;
+  // Exposed as window.tlRise so it can be re-run over markup inserted later —
+  // the language toggle replaces whole blocks, and .rise starts at opacity:0.
+  var io = null;
+  if (!reduced && "IntersectionObserver" in window) {
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -6% 0px", threshold: 0.05 });
   }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      e.target.classList.add("in");
-      io.unobserve(e.target);
+
+  function rise(root) {
+    var targets = (root || document).querySelectorAll(".rise");
+    if (!io) {
+      [].forEach.call(targets, function (el) { el.classList.add("in"); });
+      return;
+    }
+    [].forEach.call(targets, function (el, i) {
+      if (el.classList.contains("in")) return;
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) { el.classList.add("in"); return; }
+      el.style.transitionDelay = (Math.min(i % 5, 4) * 55) + "ms";
+      io.observe(el);
     });
-  }, { rootMargin: "0px 0px -6% 0px", threshold: 0.05 });
-  [].forEach.call(targets, function (el, i) {
-    el.style.transitionDelay = (Math.min(i % 5, 4) * 55) + "ms";
-    io.observe(el);
-  });
+  }
+
+  window.tlRise = rise;
+  rise(document);
 })();

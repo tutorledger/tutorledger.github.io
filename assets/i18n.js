@@ -48,6 +48,7 @@
       if (!html) return;
       if (!blockBackup.has(el)) blockBackup.set(el, el.innerHTML);
       el.innerHTML = html;
+      restoreMotion(el);
     });
     walk(function (n) {
       var t = n.nodeValue.trim();
@@ -70,9 +71,20 @@
     document.documentElement.lang = "pt-BR";
   }
 
+  /* Freshly inserted markup carries .reveal / .rise, which start at opacity:0.
+     The observers set up on page load already discarded the old nodes, so
+     without re-observing these the section stays invisible — indistinguishable
+     from a blank page. */
+  function restoreMotion(el) {
+    if (window.tlReveal) window.tlReveal(el);
+    if (window.tlRise) window.tlRise(el);
+  }
+
   function toEN() {
     document.querySelectorAll("[data-t]").forEach(function (el) {
-      if (blockBackup.has(el)) el.innerHTML = blockBackup.get(el);
+      if (!blockBackup.has(el)) return;
+      el.innerHTML = blockBackup.get(el);
+      restoreMotion(el);
     });
     walk(function (n) { if (textBackup.has(n)) n.nodeValue = textBackup.get(n); });
     document.querySelectorAll("[" + ATTRS.join("],[") + "]").forEach(function (el) {
