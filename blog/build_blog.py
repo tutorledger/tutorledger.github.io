@@ -569,6 +569,7 @@ FOOT = '''
 </footer>
 <script src="{r}assets/tl.js" defer></script>
 <script src="{r}assets/blog.js" defer></script>
+<script src="{r}assets/i18n.js" defer></script>
 <script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
 </body>
 </html>
