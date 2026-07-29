@@ -84,7 +84,7 @@
   }
 </style>
 </head>
-<body>
+<body data-pt-pack="../assets/pt-calc.json">
 
 <header class="site-head">
   <nav class="wrap nav">
@@ -107,7 +107,7 @@
 
 <main class="wrap">
 
-  <section class="tight" style="padding-bottom:26px">
+  <section class="tight" data-t="calc-hero" style="padding-bottom:26px">
     <div class="measure">
       <p class="eyebrow">Free tool · No sign-up</p>
       <h1>Tutoring Business Profit Calculator</h1>
@@ -238,7 +238,7 @@
       </div>
 
       <!-- ============ CTA ============ -->
-      <div class="card" style="margin-top:18px">
+      <div class="card" data-t="calc-cta" style="margin-top:18px">
         <h3>Those two red numbers are recoverable.</h3>
         <p class="muted" style="margin:10px 0">
           No-shows and unpaid invoices aren't a cost of doing business — they're a tracking problem.
@@ -263,7 +263,7 @@
   </div>
 
   <!-- ============ SEO CONTENT ============ -->
-  <article class="prose" style="border-top:1px solid var(--line); padding-top:40px">
+  <article class="prose" data-t="calc-article" style="border-top:1px solid var(--line); padding-top:40px">
     <h2>How to work out what your tutoring business really earns</h2>
     <p>Most tutoring business owners can tell you their monthly revenue within a few hundred. Very few can tell you their profit. The gap between those two numbers is where almost every struggling tutoring business is actually losing.</p>
     <p>There are four things standing between a booked session and money in your account, and this calculator walks through all of them in order.</p>
@@ -358,6 +358,37 @@
   var $ = function(id){ return document.getElementById(id); };
   var ids = ["currency","students","sessions","rate","paytype","payval","paynoshow","noshow","unpaid","fixed"];
 
+  /* Strings this script writes itself. They cannot be reached by the page
+     translator, which only rewrites markup that is already in the document, so
+     the language toggle hands the language in through window.tlCalcSetLang. */
+  var LANG = "en";
+  var STR = {
+    en: {
+      share:   "Tutor share (%)",
+      perSess: "Tutor pay per session (",
+      empty:   "Enter your student count and session rate to see where your money goes.",
+      loss:    "<strong>You're running at a loss of {a} a month.</strong> Before you raise prices, look at the two red lines — recovering them would close ",
+      lossAll: "the entire gap.",
+      lossMost:"most of it.",
+      leak:    "<strong>You're leaking {a} a month — {b} a year.</strong> That's {p}% of your current profit, sitting in sessions you didn't bill and invoices nobody chased.",
+      alsoPay: " You're also paying tutors {a} a month for sessions that generated no revenue at all.",
+      year:    " a year"
+    },
+    pt: {
+      share:   "Percentual do tutor (%)",
+      perSess: "Pagamento por aula (",
+      empty:   "Informe o número de alunos e o valor da aula para ver para onde vai o seu dinheiro.",
+      loss:    "<strong>Você está operando com prejuízo de {a} por mês.</strong> Antes de aumentar preços, olhe as duas linhas em vermelho — recuperá-las fecharia ",
+      lossAll: "toda a diferença.",
+      lossMost:"boa parte dela.",
+      leak:    "<strong>Você está perdendo {a} por mês — {b} por ano.</strong> Isso é {p}% do seu lucro atual, parado em aulas que você não faturou e faturas que ninguém cobrou.",
+      alsoPay: " Você também paga aos tutores {a} por mês por aulas que não geraram receita nenhuma.",
+      year:    " por ano"
+    }
+  };
+  function T(){ return STR[LANG] || STR.en; }
+  window.tlCalcSetLang = function(lang){ LANG = (lang === "pt") ? "pt" : "en"; calc(); };
+
   function num(id){ var v = parseFloat($(id).value); return isFinite(v) && v > 0 ? v : 0; }
 
   function money(v, sym){
@@ -379,8 +410,8 @@
     var fixed    = num("fixed");
 
     $("payvalLabel").textContent = payType === "pct"
-      ? "Tutor share (%)"
-      : "Tutor pay per session (" + sym + ")";
+      ? T().share
+      : T().perSess + sym + ")";
 
     var scheduled = students * perStu;
     var missed    = scheduled * nsRate;
@@ -403,10 +434,10 @@
     $("oSessions").textContent  = Math.round(scheduled).toLocaleString("en-US");
     $("oPotential").textContent = money(potential, sym);
     $("oNoshow").firstChild.nodeValue = "-" + money(noShowLoss, sym);
-    $("oNoshowYr").textContent  = noShowLoss > 0 ? money(noShowLoss * 12, sym) + " a year" : "";
+    $("oNoshowYr").textContent  = noShowLoss > 0 ? money(noShowLoss * 12, sym) + T().year : "";
     $("oInvoiced").textContent  = money(invoiced, sym);
     $("oUnpaid").firstChild.nodeValue = "-" + money(unpaid, sym);
-    $("oUnpaidYr").textContent  = unpaid > 0 ? money(unpaid * 12, sym) + " a year" : "";
+    $("oUnpaidYr").textContent  = unpaid > 0 ? money(unpaid * 12, sym) + T().year : "";
     $("oCollected").textContent = money(collected, sym);
     $("oTutor").textContent     = "-" + money(tutorCost, sym);
     $("oFixed").textContent     = "-" + money(fixed, sym);
@@ -417,20 +448,18 @@
     $("totalBox").className = net < 0 ? "total negative" : "total";
 
     var leak = noShowLoss + unpaid;
-    var v;
+    var t = T(), v;
     if (students === 0 || rate === 0) {
-      v = "Enter your student count and session rate to see where your money goes.";
+      v = t.empty;
     } else if (net < 0) {
-      v = "<strong>You're running at a loss of " + money(-net, sym) + " a month.</strong> " +
-          "Before you raise prices, look at the two red lines — recovering them would close " +
-          (leak >= -net ? "the entire gap." : "most of it.");
+      v = t.loss.replace("{a}", money(-net, sym)) +
+          (leak >= -net ? t.lossAll : t.lossMost);
     } else {
-      v = "<strong>You're leaking " + money(leak, sym) + " a month — " + money(leak * 12, sym) + " a year.</strong> " +
-          "That's " + (net > 0 ? Math.round((leak / net) * 100) : 0) + "% of your current profit, " +
-          "sitting in sessions you didn't bill and invoices nobody chased.";
+      v = t.leak.replace("{a}", money(leak, sym))
+                .replace("{b}", money(leak * 12, sym))
+                .replace("{p}", net > 0 ? Math.round((leak / net) * 100) : 0);
       if (payNoShow && missed > 0) {
-        v += " You're also paying tutors " + money(missed * perSessionCost, sym) +
-             " a month for sessions that generated no revenue at all.";
+        v += t.alsoPay.replace("{a}", money(missed * perSessionCost, sym));
       }
     }
     $("verdict").innerHTML = v;
