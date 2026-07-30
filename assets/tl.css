@@ -109,46 +109,6 @@ p{margin:0 0 1em}
   .logo svg{width:24px; height:24px}
 }
 
-/* ---------- language toggle ---------- */
-.langtoggle{
-  /* sits immediately after .nav-spacer, so no margin trickery is needed */
-  display:inline-flex; align-items:center; gap:1px; flex:none;
-  background:var(--bg-alt); border:1px solid var(--line); border-radius:999px;
-  padding:3px; cursor:pointer; font-family:inherit; line-height:1;
-}
-.langtoggle span{
-  padding:5px 10px; border-radius:999px; font-size:11.5px; font-weight:700;
-  letter-spacing:.04em; color:var(--ink-faint); transition:background .18s ease, color .18s ease;
-}
-.langtoggle span.on{background:var(--accent); color:#fff}
-.langtoggle:hover{border-color:var(--accent)}
-.langtoggle:focus-visible{outline:3px solid var(--accent-soft); outline-offset:2px}
-@media (max-width:560px){ .langtoggle span{padding:5px 8px; font-size:11px} }
-
-#tl-lang-note{
-  background:#FFF4DE; border-bottom:1px solid var(--line);
-  color:#8A5A00; font-size:13.5px; line-height:1.5;
-  overflow:hidden; transition:height .24s ease, opacity .2s ease;
-}
-#tl-lang-note .wrap{
-  padding-top:11px; padding-bottom:11px;
-  display:flex; align-items:flex-start; gap:16px;
-}
-#tl-lang-note p{margin:0; flex:1}
-#tl-lang-note .close{
-  flex:none; background:transparent; border:0; cursor:pointer; color:inherit;
-  padding:3px; margin:-2px -4px 0 0; border-radius:6px; opacity:.65;
-  display:inline-flex; transition:opacity .15s ease, background .15s ease;
-}
-#tl-lang-note .close:hover{opacity:1; background:rgba(138,90,0,.12)}
-#tl-lang-note .close:focus-visible{outline:2px solid currentColor; outline-offset:1px}
-#tl-lang-note.gone{height:0 !important; opacity:0}
-@media (prefers-color-scheme: dark){
-  #tl-lang-note{background:#2A2113; color:#D9A441}
-  #tl-lang-note .close:hover{background:rgba(217,164,65,.16)}
-}
-@media (prefers-reduced-motion: reduce){ #tl-lang-note{transition:none} }
-
 /* ---------- buttons ---------- */
 .btn{
   --glow:43,91,215;                      /* accent, as rgb triplet for rgba() */

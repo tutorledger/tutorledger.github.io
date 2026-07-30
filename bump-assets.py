@@ -17,8 +17,7 @@ import os
 import re
 
 SITE = os.path.dirname(os.path.abspath(__file__))
-TRACKED = ("assets/tl.css", "assets/tl.js", "assets/blog.css", "assets/blog.js",
-           "assets/i18n.js")
+TRACKED = ("assets/tl.css", "assets/tl.js", "assets/blog.css", "assets/blog.js")
 
 stamps = {}
 for rel in TRACKED:

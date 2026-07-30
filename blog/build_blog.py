@@ -533,7 +533,7 @@ def head(title, desc, canonical, css_extra="", jsonld=""):
     <div class="nav-spacer"></div>
     <a class="navlink hide-sm" href="{css_extra}blog/">Blog</a>
     <a class="navlink" href="{css_extra}tutoring-profit-calculator/">Free calculator</a>
-    <a class="btn glow" href="{css_extra or './'}">The system — $29</a>
+    <a class="btn glow" href="{css_extra or './'}">The system — $19</a>
   </nav>
 </header>
 '''
@@ -548,7 +548,7 @@ FOOT = '''
       </div>
       <div>
         <h4>Product</h4>
-        <a href="{r}">TutorLedger — $29</a>
+        <a href="{r}">TutorLedger — $19</a>
         <a href="{r}tutoring-profit-calculator/">Free profit calculator</a>
         <a href="{r}blog/">Blog</a>
       </div>
@@ -569,7 +569,6 @@ FOOT = '''
 </footer>
 <script src="{r}assets/tl.js" defer></script>
 <script src="{r}assets/blog.js" defer></script>
-<script src="{r}assets/i18n.js" defer></script>
 <script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
 </body>
 </html>
