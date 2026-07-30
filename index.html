@@ -14,7 +14,7 @@
 <meta property="og:image" content="https://tutorledger.github.io/assets/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/logo.svg">
-<link rel="stylesheet" href="assets/tl.css?v=08d404c8">
+<link rel="stylesheet" href="assets/tl.css?v=f169155d">
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -50,7 +50,7 @@
     <a class="navlink hide-sm" href="#faq">FAQ</a>
     <a class="navlink hide-sm" href="blog/">Blog</a>
     <a class="navlink" href="tutoring-profit-calculator/">Free calculator</a>
-    <a class="btn glow" href="https://www.etsy.com/shop/TutorLedger" rel="noopener">Get it — $19</a>
+    <a class="btn glow" href="#notify">Notify me</a>
   </nav>
 </header>
 
@@ -74,9 +74,14 @@
         <span class="pill">Launch price</span>
       </div>
 
-      <p style="margin-bottom:22px">
-        <a class="btn lg glow" href="https://www.etsy.com/shop/TutorLedger" rel="noopener">Get TutorLedger</a>
-      </p>
+      <div id="notify" style="margin-bottom:22px">
+        <form class="notify" action="https://formspree.io/f/mjgnlzzq" method="POST">
+          <input type="email" name="email" placeholder="you@yourbusiness.com" required aria-label="Your email address">
+          <input type="hidden" name="source" value="prelaunch-hero">
+          <button class="btn lg glow" type="submit">Tell me when it's ready</button>
+        </form>
+        <p class="tiny faint" style="margin:9px 0 0">Launching shortly on Etsy at $19. One email when it goes live — nothing else, unsubscribe any time.</p>
+      </div>
 
       <div class="trustbar">
         <span><svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8 14.2 4.3 10.5l1.4-1.4L8 11.4l6.3-6.3 1.4 1.4z"/></svg> 30-day refund, no questions</span>
@@ -406,7 +411,7 @@
         <div class="a"><p>About 20 minutes for your settings, tutors and rates, plus roughly a minute per student to enter your roster. The included guide walks through it in the order that avoids rework. After setup, budget about fifteen minutes a week.</p></div></details>
 
       <details class="faq reveal"><summary>How do I get it after paying?</summary>
-        <div class="a"><p>The button takes you to our Etsy shop, where the purchase is completed. Etsy handles the payment and any VAT or sales tax that applies where you are. Your download is available immediately on your Etsy purchases page and by email — four files plus a short read-me. Nothing is shipped.</p></div></details>
+        <div class="a"><p>The purchase is completed on Etsy, which handles the payment and any VAT or sales tax that applies where you are. Your download is available immediately on your Etsy purchases page and by email — four files plus a short read-me. Nothing is shipped.</p></div></details>
 
       <details class="faq reveal"><summary>Are there reviews?</summary>
         <div class="a"><p>Not yet — TutorLedger is new, and we won't publish testimonials we don't have. That's exactly why the refund policy is unconditional and why the free calculator lets you test the thinking before you spend anything.</p></div></details>
@@ -424,11 +429,15 @@
     <div class="price" style="margin:26px 0 20px">
       <span class="now num" style="color:#fff">$19</span>
     </div>
-    <div class="btnrow">
-      <a class="btn lg onnavy glow" href="https://www.etsy.com/shop/TutorLedger" rel="noopener">Get TutorLedger</a>
+    <form class="notify onnavy" action="https://formspree.io/f/mjgnlzzq" method="POST" style="margin-bottom:14px">
+      <input type="email" name="email" placeholder="you@yourbusiness.com" required aria-label="Your email address">
+      <input type="hidden" name="source" value="prelaunch-cta">
+      <button class="btn lg onnavy glow" type="submit">Tell me when it's ready</button>
+    </form>
+    <div class="btnrow" style="margin-bottom:14px">
       <a class="btn lg ghost" href="tutoring-profit-calculator/" style="color:#c3cddb; border-color:#2c3d5c">Try the free calculator</a>
     </div>
-    <p class="tiny" style="color:#8496af; margin:0">Secure checkout on Etsy · Instant download · 30-day refund · One-time payment</p>
+    <p class="tiny" style="color:#8496af; margin:0">Launching shortly on Etsy · $19 one-time · Instant download · 30-day refund</p>
   </div>
 </section>
 

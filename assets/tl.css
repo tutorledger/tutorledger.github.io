@@ -109,6 +109,22 @@ p{margin:0 0 1em}
   .logo svg{width:24px; height:24px}
 }
 
+/* ---------- pre-launch capture ---------- */
+/* Enquanto a loja nao abre, os CTAs viram captura de e-mail. Mesma altura e
+   mesmo raio dos botoes, para o bloco nao mudar de peso na pagina. */
+.notify{display:flex; gap:10px; flex-wrap:wrap; align-items:stretch; margin:0}
+.notify input[type=email]{
+  flex:1 1 250px; min-width:0; padding:0 15px; font:inherit; font-size:15.5px;
+  color:var(--ink); background:var(--bg); border:1px solid var(--line);
+  border-radius:var(--radius-sm); outline:none;
+}
+.notify input[type=email]:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.notify button{flex:none}
+.notify.onnavy input[type=email]{background:#1b2b49; border-color:#2c3d5c; color:#fff}
+.notify.onnavy input[type=email]::placeholder{color:#7f90ab}
+.notify.onnavy input[type=email]:focus{border-color:#5c85e0; box-shadow:0 0 0 3px rgba(92,133,224,.25)}
+@media (max-width:520px){ .notify button{width:100%} }
+
 /* ---------- buttons ---------- */
 .btn{
   --glow:43,91,215;                      /* accent, as rgb triplet for rgba() */
