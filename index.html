@@ -192,13 +192,13 @@
           <tr class="hl"><td><strong>Action List</strong> 🔒</td><td>The one you open on a Monday. Every family who owes you, ranked by how much it's costing you, with what to say and which of the bonus emails to send.</td></tr>
           <tr><td><strong>Setup</strong></td><td>Your plans and rates, your tutors and their pay, your payment terms, your no-show policy. Everything else reads from here.</td></tr>
           <tr><td><strong>Students</strong></td><td>Roster with guardian, plan, discount, assigned tutor and status — grouped by family, so siblings bill together.</td></tr>
-          <tr><td><strong>Sessions</strong></td><td>Every session logged with status: held, no-show, late cancel, notice cancel or makeup. Billing and tutor cost apply themselves from your policy.</td></tr>
+          <tr><td><strong>Sessions</strong></td><td>Every session logged with status: held, no-show, late cancel, notice cancel or makeup. Billing and tutor cost apply themselves from your policy. Group classes take a headcount, so an hourly tutor is costed once for the class rather than once per student.</td></tr>
           <tr><td><strong>Invoices</strong></td><td>What you've billed, to which family, for which period, and when it was due.</td></tr>
           <tr><td><strong>Payments</strong></td><td>What's come in, applied against the right invoice.</td></tr>
           <tr class="hl"><td><strong>Aging</strong> 🔒</td><td>The collections engine. Balance per family, days overdue, and 30/60/90 buckets with a traffic-light view.</td></tr>
           <tr><td><strong>Tutor Payouts</strong> 🔒</td><td>Per tutor, per period: sessions held, hours, what you owe them, and the margin they generated.</td></tr>
           <tr><td><strong>Dashboard</strong> 🔒</td><td>Collection rate, outstanding by bucket, active and churned students, margin after tutor pay, no-show cost, top and bottom students, three-month forecast — plus three charts.</td></tr>
-          <tr class="hl"><td><strong>Health Check</strong> 🔒</td><td>Seventeen checks that catch the input mistakes that quietly produce confident wrong numbers — a session pointing at a student who doesn't exist, a payment filed under a family that isn't on your roster, an invoice with no due date.</td></tr>
+          <tr class="hl"><td><strong>Health Check</strong> 🔒</td><td>Eighteen checks that catch the input mistakes that quietly produce confident wrong numbers — a session pointing at a student who doesn't exist, a payment filed under a family that isn't on your roster, an invoice with no due date.</td></tr>
         </tbody>
       </table>
     </div>
@@ -225,7 +225,7 @@
     <figure class="shot reveal" style="margin:0 0 18px">
       <div class="bar"><i></i><i></i><i></i></div>
       <div class="body" style="overflow-x:auto">
-        <img src="assets/shot-dashboard.png" width="2152" height="1126" loading="lazy"
+        <img src="assets/shot-dashboard.png" width="2152" height="1242" loading="lazy"
              alt="The TutorLedger dashboard showing invoiced and collected totals, collection rate, outstanding balance, active students, margin after tutor pay and the monthly cost of missed sessions.">
       </div>
       <figcaption>The Dashboard. Change one cell — the month — and every figure follows.</figcaption>
@@ -243,14 +243,14 @@
     <div class="grid g2">
       <figure class="shot fit reveal" style="margin:0">
         <div class="body" style="padding:14px; background:var(--card)">
-          <img src="assets/chart-collections.png" width="908" height="409" loading="lazy"
+          <img src="assets/chart-collections.png" width="1040" height="469" loading="lazy"
                alt="Column chart comparing invoiced against collected revenue for the last six months.">
         </div>
         <figcaption>Six months of invoiced against actually collected. The gap is the problem.</figcaption>
       </figure>
       <figure class="shot fit reveal" style="margin:0">
         <div class="body" style="padding:14px; background:var(--card)">
-          <img src="assets/chart-aging.png" width="908" height="409" loading="lazy"
+          <img src="assets/chart-aging.png" width="1040" height="469" loading="lazy"
                alt="Column chart of outstanding balance by age bucket, coloured green through to red.">
         </div>
         <figcaption>Outstanding balance by age. Everything right of green is money you already earned.</figcaption>
@@ -341,6 +341,7 @@
           <li>You run a tutoring or test-prep business with roughly 10 to 200 students</li>
           <li>You have at least one tutor other than yourself, or plan to</li>
           <li>You bill monthly tuition, per session, or a mix of both</li>
+          <li>You teach one-to-one, small groups, or both</li>
           <li>You're comfortable typing into a spreadsheet — no formulas required</li>
           <li>You'd rather own a file than rent a platform</li>
         </ul>
